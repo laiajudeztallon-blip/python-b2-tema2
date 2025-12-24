@@ -48,19 +48,36 @@ import typing as t
 
 def read_population_data(url: str, match_text: str = None) -> t.List[pd.DataFrame]:
     # Write here your code
-    pass
+     "class": "wikitable"
+    }  # Asumiendo que queremos tablas con la clase 'wikitable'
+    if match_text:
+        tables = pd.read_html(
+            url, match=match_text, attrs=attrs, na_values=["—", "None"]
+        )
+    else:
+        tables = pd.read_html(url, attrs=attrs, na_values=["–", "None"])
+    return tables
+
 
 
 def get_table_by_string_match(
     tables: t.List[pd.DataFrame], match_text: str
 ) -> t.Union[pd.DataFrame, None]:
     # Write here your code
-    pass
+    try:
+        for table in tables:
+            if match_text in table.to_string():
+                return table
+        print(f"No se encontró una tabla que coincida con '{match_text}'.")
+        return None
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+        return None
 
 
 def count_tables(tables: t.List[pd.DataFrame]) -> int:
     # Write here your code
-    pass
+    return len(tables)
 
 
 # Para probar el código, descomenta las siguientes líneas
