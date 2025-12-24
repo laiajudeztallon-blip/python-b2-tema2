@@ -37,22 +37,26 @@ from scipy import stats
 
 def calculate_mean(file_path: str) -> float:
     # Write here your code
-    pass
+    data = pd.read_csv(file_path)
+    return data["Calificaciones"].mean()
 
 
 def calculate_mean(file_path: str) -> float:
     # Write here your code
-    pass
+    data = pd.read_csv(file_path)
+    return data["Calificaciones"].var()
 
 
 def calculate_skewness(file_path: str) -> float:
     # Write here your code
-    pass
+    data = pd.read_csv(file_path)
+    return stats.skew(data["Calificaciones"])
 
 
 def calculate_kurtosis(file_path: str) -> float:
     # Write here your code
-    pass
+    data = pd.read_csv(file_path)
+    return stats.kurtosis(data["Calificaciones"])
 
 
 # Para probar el código, descomenta las siguientes líneas
